@@ -32,8 +32,8 @@
     </div>
   </template>
   
-  <script>
-  //TODO: Modificar por Composition.API
+  <!--
+<script>
   import deleteIcon from '@/assets/images/delete-button.svg';
 
   export default {
@@ -45,17 +45,6 @@
       },
     },
 
-    
-    //TODO: Revisar porque no me funciona esto!! 
-    //Alternativa que voy a usar es meter las imagenes en la carpeta public
-/*
-    computed: {
-    imageUrl() {
-      return require(`@/assets/images/${this.plantInfo.image}`);
-    },
-  },
-    */
-  
     data() {
       return{
         deleteIcon: deleteIcon,
@@ -63,6 +52,24 @@
     },
   };
   </script>
+  -->
+
+<script setup>
+import { ref } from 'vue';
+import deleteIcon from '@/assets/images/delete-button.svg';
+
+//props the defineProps
+const props = defineProps({
+  plantInfo: {
+    type: Object,
+    required: true
+  }
+});
+
+//Use ref for reactive data that needs to be reactive
+const icon = ref(deleteIcon);
+</script>
+  
   
 <style scoped>
 .plant-item {

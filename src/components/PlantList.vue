@@ -8,8 +8,8 @@
     </div>
   </template>
   
+  <!--
   <script>
-  //TODO: Modificar por Composition.API
   import PlantItem from './PlantItem.vue';
   
   export default {
@@ -25,6 +25,28 @@
     },
   };
   </script>
+  -->
+
+<script setup>
+import PlantItem from './PlantItem.vue';
+import { defineComponent, defineProps } from 'vue';
+
+//Usar defineProps para definir propiedades y obtener beneficios
+const props = defineProps({
+  plantList: {
+    type:Array,
+    required: true
+  }
+});
+
+//Registrar el componente PlantItem para uso en este componente
+defineComponent({
+  components: {
+    PlantItem
+  }
+});
+</script>
+
   
   <style scoped>
   .plant-list {

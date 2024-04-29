@@ -16,8 +16,9 @@
     </div>
   </template>
   
-  <script>
-  //TODO: Modificar por Composition.API
+ <!--
+ <script>
+ //Options.API Decrepeted
   export default {
     name: 'ModalLayer',
     methods: {
@@ -28,6 +29,19 @@
     },
   };
   </script>
+ --> 
+<!--
+-->
+<script setup>
+import { defineEmits } from 'vue';
+
+const emit = defineEmits(['close']);
+
+function closeModal(){
+  emit('close');
+}
+</script>
+ 
   
   <style scoped>
   .modal {

@@ -57,8 +57,9 @@
   </div>
 </template>
   
+
+<!--
   <script>
-  //TODO: Modificar por Composition.API
   export default {
     name: 'PlantForm',
     data() {
@@ -86,6 +87,38 @@
     }
   };
   </script>
+-->
+
+<script setup>
+import {ref, defineEmits } from 'vue';
+
+//Definir los eventos que el componnete emitwe
+const emit = defineEmits(['submit-plant']);
+
+//Crear referencia reactiva
+const plant = ref({
+  name: '',
+  favorite: false,
+});
+
+//Metodo para enviar el formulario
+const submitForm = () => {
+  emit('submit-plant', plant.value);
+  resetForm();
+};
+
+//Metodo para reiniciar el formulario
+const resetForm = () =>{
+  plant.value = {
+    name: '',
+    favorite: false,
+  };
+};
+
+
+
+</script>
+
   
   <style scoped>
   .plant-form {
