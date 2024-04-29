@@ -58,65 +58,58 @@
 </template>
   
 
-<!--
-  <script>
-  export default {
-    name: 'PlantForm',
-    data() {
-      return {
-        plant: {
-          name: '',
-          favorite: false,
-        },
-      };
-    },
-    methods: {
-      submitForm() {
-        //Event with new plant data
-        this.$emit('submit-plant', this.plant);
-        //Reset the form
-        this.resetForm();
-      },
-      resetForm() {
-        this.plant = {
-          name: '',
-          favorite: false,
-          // ...
-        };
-      }
-    }
-  };
-  </script>
--->
-
 <script setup>
 import {ref, defineEmits } from 'vue';
+import { v4 as uuidv4 } from 'uuid';
 
 //Definir los eventos que el componnete emitwe
-const emit = defineEmits(['submit-plant']);
+const emit = defineEmits(['add-plant']);
 
 //Crear referencia reactiva
 const plant = ref({
+  id: '',
   name: '',
+  description: '',
+  imageURL: '',
+  date: '',
+  family: '',
+  genus: '',
+  species: '',
+  labels: '',
   favorite: false,
+  rating: 0,
+  personalNote: '',
 });
 
 //Metodo para enviar el formulario
 const submitForm = () => {
-  emit('submit-plant', plant.value);
+  if (!plant.value.name || !plant.value.description || !plant.value.imageURL || !plant.value.date) {
+    alert("Please fill in all required fields.");
+    return;
+  }
+
+  const labelsArray = plant.value.labels.split(',').map(label => label.trim());
+  const newPlant = {
+    ...plant.value,
+    id: uuidv4(),
+    labels: labelsArray
+  };
+
+  emit('add-plant', newPlant);
   resetForm();
 };
 
 //Metodo para reiniciar el formulario
-const resetForm = () =>{
-  plant.value = {
-    name: '',
-    favorite: false,
-  };
+const resetForm = () => {
+  for (const key in plant.value) {
+    if (typeof plant.value[key] === 'boolean') {
+      plant.value[key] = false;
+    } else {
+      plant.value[key] = '';
+    }
+  }
+  plant.value.rating = 0; // Restablece explícitamente la calificación si es un rango
 };
-
-
-
 </script>
 
   

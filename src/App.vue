@@ -141,13 +141,24 @@ const closeModal = () => {
   isModalVisible.value = false;
 };
 
+/*
 const addNewPlant = (newPlantData) => {
   plantList.value.push({ ...newPlant, id: Date.now() });
   applyFilters();
   closeModal();
   
   Object.keys(newPlant).forEach(key => newPlant[key] = '');
+};*/
+
+const addNewPlant = (newPlantData) => {
+  const newPlantWithId = { ...newPlantData, id: Date.now() }; // Asegúrate de que newPlantData ya contiene toda la información necesaria
+  plantList.value.push(newPlantWithId);
+  applyFilters(); // Actualiza las plantas filtradas
+  closeModal(); // Cierra el modal
+  resetFormState(); // Limpia el estado del formulario en `PlantForm.vue` si es necesario
+  
 };
+
 
 const handleFilterUpdate = (criteria) => {
   Object.assign(currentFilterCriteria, criteria);

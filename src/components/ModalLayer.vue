@@ -14,27 +14,12 @@
         </div>
       </div>
     </div>
-  </template>
+</template>
   
- <!--
- <script>
- //Options.API Decrepeted
-  export default {
-    name: 'ModalLayer',
-    methods: {
-      closeModal() {
-        //Event when closing the modal, to use in the future.
-        this.$emit('close');
-      },
-    },
-  };
-  </script>
- --> 
-<!--
--->
 <script setup>
 import { defineEmits } from 'vue';
 
+//Asi lo tenia antes
 const emit = defineEmits(['close']);
 
 function closeModal(){
@@ -43,7 +28,7 @@ function closeModal(){
 </script>
  
   
-  <style scoped>
+<style scoped>
   .modal {
     position: fixed;
     top: 0;
@@ -92,5 +77,5 @@ function closeModal(){
   .modal__close img {
     width: 20px;
   }
-  </style>
+</style>
   
