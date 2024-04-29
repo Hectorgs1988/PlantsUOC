@@ -7,33 +7,6 @@
   </template>
   
 
-  <!--
-  <script>
-  export default {
-    name: 'SearchBar',
-    data() {
-      return {
-        searchQuery: '',
-      };
-    },
-    
-    //Generation of events for future use
-    methods: {
-      onSearch() {
-        this.$emit('search', this.searchQuery);
-      },
-      clearSearch() {
-        this.searchQuery = '';
-        this.onSearch();
-      },
-      addPlant() {
-        this.$emit('add-plant');
-      },
-    },
-  };
-  </script>
-  -->
-
 <script setup>
 import { ref, defineEmits } from 'vue';
 

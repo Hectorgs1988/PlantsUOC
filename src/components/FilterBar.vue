@@ -26,46 +26,8 @@
         <label for="favoriteFilter">Favorite</label>
       </div>
     </div>
-  </template>
+</template>
   
-  <!-- Options.API, esto lo voy a cambiar por Compositions.API-->
-  <!--
-<script>
-//Options.API Decrepeted
-  /*
-  export default {
-    name: 'FilterBar',
-    data() {
-      return {
-        sortBy: 'name',
-        order: 'asc',
-        showFavorites: false,
-      };
-    },
-    watch: {
-      sortBy(newVal) {
-        this.emitFilterUpdate();
-      },
-      order(newVal) {
-        this.emitFilterUpdate();
-      },
-      showFavorites(newVal) {
-        this.emitFilterUpdate();
-      },
-    },
-    methods: {
-      emitFilterUpdate() {
-        this.$emit('update-filter', {
-          sortBy: this.sortBy,
-          order: this.order,
-          showFavorites: this.showFavorites,
-        });
-      },
-    },
-  };*/
-  </script>
-  -->
-
 <script setup>
 //COMPOSITION.API
 import {ref, watch} from 'vue';
@@ -92,7 +54,7 @@ watch([sortBy, order, showFavorites], ()=>{
 </script>
   
   
-  <style scoped>
+<style scoped>
   .filter-bar {
     display: flex;
     align-items: center;
@@ -124,5 +86,5 @@ watch([sortBy, order, showFavorites], ()=>{
   .filter-bar__check label {
     cursor: pointer;
   }
-  </style>
+</style>
   

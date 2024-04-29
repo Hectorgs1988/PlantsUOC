@@ -31,12 +31,12 @@ const handleDeletePlant = (id) => {
 </script>
 
   
-  <style scoped>
+<style scoped>
   .plant-list {
     padding: 20px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
   }
-  </style>
+</style>
   

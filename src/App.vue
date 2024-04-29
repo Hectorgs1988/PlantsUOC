@@ -8,7 +8,9 @@
       <SearchBar @search="handleSearch" @add-plant="handleAddPlant" />
       <FilterBar @update-filter="handleFilterUpdate" />
       <main class="main">
-        <PlantList :plantList="plantList" @delete-plant="handleDeletePlant" />
+        <PlantList :plantList="filteredPlantList" @delete-plant="handleDeletePlant" />
+        <!-- <PlantList :plantList="filteredPlantList" />  
+        <PlantList :plantList="plantList" @delete-plant="handleDeletePlant" /> -->
       </main>
       
       <!-- Modal to add a new plant -->
@@ -148,7 +150,8 @@ const addNewPlant = (newPlantData) => {
   closeModal();
   
   Object.keys(newPlant).forEach(key => newPlant[key] = '');
-};*/
+};
+*/
 
 const addNewPlant = (newPlantData) => {
   const newPlantWithId = { ...newPlantData, id: Date.now() }; // Asegúrate de que newPlantData ya contiene toda la información necesaria

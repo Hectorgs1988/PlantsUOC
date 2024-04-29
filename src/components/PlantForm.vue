@@ -95,7 +95,8 @@ const submitForm = () => {
     labels: labelsArray
   };
 
-  emit('add-plant', newPlant);
+  //Revisar si los dos paramtros deben ir entre ' ', inicialmente solo add-plant va entre comillas
+  emit('add-plant', 'newPlant');
   resetForm();
 };
 
@@ -113,7 +114,7 @@ const resetForm = () => {
 </script>
 
   
-  <style scoped>
+<style scoped>
   .plant-form {
     padding: 1rem;
   }
@@ -163,5 +164,5 @@ const resetForm = () => {
     border-radius: 0.25rem;
     cursor: pointer;
   }
-  </style>
+</style>
   
