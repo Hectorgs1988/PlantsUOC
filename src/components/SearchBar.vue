@@ -7,6 +7,7 @@
   </template>
   
   <script>
+  //TODO: Modificar por Composition.API
   export default {
     name: 'SearchBar',
     data() {

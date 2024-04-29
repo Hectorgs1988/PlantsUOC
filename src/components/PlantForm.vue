@@ -58,6 +58,7 @@
 </template>
   
   <script>
+  //TODO: Modificar por Composition.API
   export default {
     name: 'PlantForm',
     data() {

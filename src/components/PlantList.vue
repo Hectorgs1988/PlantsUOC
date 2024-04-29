@@ -9,6 +9,7 @@
   </template>
   
   <script>
+  //TODO: Modificar por Composition.API
   import PlantItem from './PlantItem.vue';
   
   export default {

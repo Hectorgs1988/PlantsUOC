@@ -28,7 +28,11 @@
     </div>
   </template>
   
-  <script>
+  <!-- Options.API, esto lo voy a cambiar por Compositions.API-->
+  <!--
+<script>
+//Options.API Decrepeted
+  /*
   export default {
     name: 'FilterBar',
     data() {
@@ -58,8 +62,35 @@
         });
       },
     },
-  };
+  };*/
   </script>
+  -->
+
+<script setup>
+//COMPOSITION.API
+import {ref, watch} from 'vue';
+
+const sortBy = ref('name');
+const order = ref('asc');
+const showFavorites = ref(false);
+
+// Define los eventos que puede emitir este componente
+const emit = defineEmits(['update-filter']);
+
+const emitFilterUpdate = () =>{
+  //Para emitir el vento
+  emit('update-filter',{
+    sortBy:sortBy.value,
+    order: order.value,
+    showFavorites:showFavorites.value,
+  });
+};
+
+watch([sortBy, order, showFavorites], ()=>{
+  emitFilterUpdate();
+});
+</script>
+  
   
   <style scoped>
   .filter-bar {

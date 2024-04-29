@@ -33,6 +33,7 @@
   </template>
   
   <script>
+  //TODO: Modificar por Composition.API
   import deleteIcon from '@/assets/images/delete-button.svg';
 
   export default {
