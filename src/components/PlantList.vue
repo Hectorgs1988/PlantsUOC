@@ -4,32 +4,14 @@
         v-for="plant in plantList"
         :key="plant.id"
         :plantInfo="plant"
+        @delete-plant="handleDeletePlant"
       />
     </div>
   </template>
-  
-  <!--
-  <script>
-  import PlantItem from './PlantItem.vue';
-  
-  export default {
-    name: 'PlantList',
-    components: {
-      PlantItem
-    },
-    props: {
-      plantList: {
-        type: Array,
-        required: true
-      },
-    },
-  };
-  </script>
-  -->
 
 <script setup>
 import PlantItem from './PlantItem.vue';
-import { defineComponent, defineProps } from 'vue';
+import { defineProps, defineEmits } from 'vue';
 
 //Usar defineProps para definir propiedades y obtener beneficios
 const props = defineProps({
@@ -39,12 +21,13 @@ const props = defineProps({
   }
 });
 
-//Registrar el componente PlantItem para uso en este componente
-defineComponent({
-  components: {
-    PlantItem
-  }
-});
+const emit = defineEmits(['delete-plant']);
+
+//Funcion para manejar el evento delete-plant y remitirlo
+const handleDeletePlant = (id) => {
+  emit('delete-plant', id);
+};
+
 </script>
 
   

@@ -2,7 +2,7 @@
     <div class="plant-item" :class="{ 'plant-item--favorite': plantInfo.favorite }">
       <div class="plant-item__id" :data-id="plantInfo.id"></div>
 
-      <button class="plant-item__delete">
+      <button class="plant-item__delete" @click="DeletePlant">
         <img :src="deleteIcon" alt="Delete plant">
       </button>
 
@@ -32,30 +32,8 @@
     </div>
   </template>
   
-  <!--
-<script>
-  import deleteIcon from '@/assets/images/delete-button.svg';
-
-  export default {
-    name: 'PlantItem',
-    props: {
-      plantInfo: {
-        type: Object,
-        required: true
-      },
-    },
-
-    data() {
-      return{
-        deleteIcon: deleteIcon,
-      };
-    },
-  };
-  </script>
-  -->
-
 <script setup>
-import { ref } from 'vue';
+import { ref, defineEmits } from 'vue';
 import deleteIcon from '@/assets/images/delete-button.svg';
 
 //props the defineProps
@@ -65,6 +43,12 @@ const props = defineProps({
     required: true
   }
 });
+
+const emit = defineEmits(['delete-plant']);
+
+const DeletePlant = () => {
+  emit('delete-plant', props.plantInfo.id);
+};
 
 //Use ref for reactive data that needs to be reactive
 const icon = ref(deleteIcon);

@@ -8,7 +8,7 @@
       <SearchBar @search="handleSearch" @add-plant="handleAddPlant" />
       <FilterBar @update-filter="handleFilterUpdate" />
       <main class="main">
-        <PlantList :plantList="filteredPlantList" />
+        <PlantList :plantList="plantList" @delete-plant="handleDeletePlant" />
       </main>
       
       <!-- Modal to add a new plant -->
@@ -130,6 +130,11 @@ const handleSearch = (query) => {
 
 const handleAddPlant = () => {
   isModalVisible.value = true;
+};
+
+//handleDeletePlant
+const handleDeletePlant = (id) => {
+  plantList.value = plantList.value.filter(plant => plant.id !== id);
 };
 
 const closeModal = () => {
