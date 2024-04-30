@@ -62,14 +62,14 @@ const plantList = ref([
    species: 'Ficus lyrata',
    labels: ['houseplant', 'interior', 'low maintenace'],
    favorite: true,
-   rating: 5,
+   rating: 4,
    image: 'fiddle-leaf-fig-plant-pot.jpg'
  },
 
  {
    id: 3,
    name: 'Snake Plant',
-   description: 'The Monstera is a tropical plant native to Central America. It is known for its large, glossy leaves that have natural holes in them. The Monstera is a popular houseplant due to its unique appeareance and low maintenance requierements.',
+   description: 'Lorem ipsum dolor sit amet consectetur adipiscing elit tortor in, feugiat tempus nec eu phasellus nam varius montes, nisi imperdiet bibendum faucibus libero pretium hac nullam. Sociosqu iaculis etiam ridiculus viverra fringilla pulvinar, ac praesent leo egestas purus orci quisque, convallis rhoncus primis duis cursus. Tempor arcu integer dis ligula et luctus pellentesque penatibus, rutrum risus ornare sapien taciti est.',
    date: '2021-06-01',
    family: 'Asparagaceae',
    genus: 'Monstera',
@@ -83,28 +83,28 @@ const plantList = ref([
  {
    id: 4,
    name: 'Pothos',
-   description: 'The Monstera is a tropical plant native to Central America. It is known for its large, glossy leaves that have natural holes in them. The Monstera is a popular houseplant due to its unique appeareance and low maintenance requierements.',
+   description: 'Lorem ipsum dolor sit amet consectetur adipiscing elit curabitur, dictum natoque posuere lacinia primis ridiculus quam est netus, gravida egestas dictumst porttitor class aliquam hac quis, et fringilla cras imperdiet dui eu etiam. Ad ut fames sem suscipit vel mus, diam facilisi lacus dignissim hendrerit nibh, tincidunt pulvinar volutpat proin cubilia.',
    date: '2021-06-01',
    family: 'Araceae',
    genus: 'Monstera',
    species: 'Monstera deliciosa',
    labels: ['Tropical', 'houseplant', 'low maintenace'],
    favorite: false,
-   rating: 5,
+   rating: 3,
    image: 'pothos-plant-pot-bench.jpg'
  },
 
  {
    id: 5,
    name: 'Ficus Europeo',
-   description: 'The Monstera is a tropical plant native to Central America. It is known for its large, glossy leaves that have natural holes in them. The Monstera is a popular houseplant due to its unique appeareance and low maintenance requierements.',
+   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan tellus et felis vehicula, vitae porta ex convallis. Phasellus ut euismod leo. Fusce vitae pulvinar diam, ac egestas quam. Phasellus feugiat orci eget quam maximus porttitor. Sed sed consequat dui. Suspendisse commodo commodo odio, at congue massa blandit nec. Donec dignissim eu orci in molestie. Nunc in metus orci. Quisque vehicula neque a nunc accumsan commodo. Sed nec rhoncus tellus. Pellentesque vulputate sagittis massa ut mollis. In ullamcorper varius tortor at euismod. Phasellus feugiat ante sit amet mi pretium lobortis nec eget elit. Sed nec nisl in quam facilisis placerat.',
    date: '2021-06-01',
    family: 'Araceae',
    genus: 'Monstera',
    species: 'Monstera deliciosa',
    labels: ['Tropical', 'houseplant', 'low maintenace'],
    favorite: false,
-   rating: 5,
+   rating: 4,
    image: 'botanical-leaves.jpg'
  },
 ]);
@@ -132,7 +132,7 @@ const handleAddPlant = () => {
   isModalVisible.value = true;
 };
 
-//handleDeletePlant
+
 const handleDeletePlant = (id) => {
   plantList.value = plantList.value.filter(plant => plant.id !== id);
 };
@@ -142,17 +142,8 @@ const closeModal = () => {
 };
 
 
-// const addNewPlant = (newPlantData) => {
-//   plantList.value.push({ ...newPlant, id: Date.now() });
-//   applyFilters();
-//   closeModal();
-  
-//   Object.keys(newPlant).forEach(key => newPlant[key] = '');
-// };
-
-
 const addNewPlant = (newPlantData) => {
-  const newPlantWithId = { ...newPlantData, id: Date.now() }; // Asegúrate de que newPlantData ya contiene toda la información necesaria
+  const newPlantWithId = { ...newPlantData, id: Date.now() };
   plantList.value.push(newPlantWithId);
   applyFilters(); // Actualiza las plantas filtradas
   closeModal(); // Cierra el modal
