@@ -45,7 +45,8 @@
         </div>
         <div class="plant-form__form-group">
           <label for="rating">Rating</label>
-          <input id="rating" v-model="plant.rating" type="range">
+          <input id="rating" v-model="plant.rating" type="range" min="0" max="5">
+          <span>{{ plant.rating }}</span>
         </div>
       </div>
   
@@ -63,7 +64,7 @@ import {ref, defineEmits } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
 
 //Definir los eventos que el componnete emitwe
-const emit = defineEmits(['add-plant']);
+const emit = defineEmits(['submit-plant']);
 
 //Crear referencia reactiva
 const plant = ref({
@@ -81,6 +82,8 @@ const plant = ref({
   personalNote: '',
 });
 
+
+
 //Metodo para enviar el formulario
 const submitForm = () => {
   if (!plant.value.name || !plant.value.description || !plant.value.imageURL || !plant.value.date) {
@@ -95,8 +98,8 @@ const submitForm = () => {
     labels: labelsArray
   };
 
-  //Revisar si los dos paramtros deben ir entre ' ', inicialmente solo add-plant va entre comillas
-  emit('add-plant', 'newPlant');
+  //newPlant va sin comillas porque se esta pasando el objeto
+  emit('submit-plant', newPlant);
   resetForm();
 };
 

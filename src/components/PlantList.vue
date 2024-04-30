@@ -27,7 +27,6 @@ const emit = defineEmits(['delete-plant']);
 const handleDeletePlant = (id) => {
   emit('delete-plant', id);
 };
-
 </script>
 
   

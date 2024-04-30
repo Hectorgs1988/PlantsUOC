@@ -9,8 +9,6 @@
       <FilterBar @update-filter="handleFilterUpdate" />
       <main class="main">
         <PlantList :plantList="filteredPlantList" @delete-plant="handleDeletePlant" />
-        <!-- <PlantList :plantList="filteredPlantList" />  
-        <PlantList :plantList="plantList" @delete-plant="handleDeletePlant" /> -->
       </main>
       
       <!-- Modal to add a new plant -->
@@ -143,15 +141,15 @@ const closeModal = () => {
   isModalVisible.value = false;
 };
 
-/*
-const addNewPlant = (newPlantData) => {
-  plantList.value.push({ ...newPlant, id: Date.now() });
-  applyFilters();
-  closeModal();
+
+// const addNewPlant = (newPlantData) => {
+//   plantList.value.push({ ...newPlant, id: Date.now() });
+//   applyFilters();
+//   closeModal();
   
-  Object.keys(newPlant).forEach(key => newPlant[key] = '');
-};
-*/
+//   Object.keys(newPlant).forEach(key => newPlant[key] = '');
+// };
+
 
 const addNewPlant = (newPlantData) => {
   const newPlantWithId = { ...newPlantData, id: Date.now() }; // Asegúrate de que newPlantData ya contiene toda la información necesaria
@@ -159,7 +157,6 @@ const addNewPlant = (newPlantData) => {
   applyFilters(); // Actualiza las plantas filtradas
   closeModal(); // Cierra el modal
   resetFormState(); // Limpia el estado del formulario en `PlantForm.vue` si es necesario
-  
 };
 
 
