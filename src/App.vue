@@ -145,9 +145,9 @@ const closeModal = () => {
 const addNewPlant = (newPlantData) => {
   const newPlantWithId = { ...newPlantData, id: Date.now() };
   plantList.value.push(newPlantWithId);
-  applyFilters(); // Actualiza las plantas filtradas
-  closeModal(); // Cierra el modal
-  resetFormState(); // Limpia el estado del formulario en `PlantForm.vue` si es necesario
+  applyFilters(); 
+  closeModal();
+  resetFormState(); 
 };
 
 

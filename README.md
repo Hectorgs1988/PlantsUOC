@@ -1,7 +1,13 @@
-# Vue 3 + Vite
+# Plants Book by HGS
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Web application created with VUE.js + Vite
 
-## Recommended IDE Setup
+author: Héctor García Sácnchez
+email: hectorgs@uoc.edu
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+Run: 
+
+- cd "ruta del proyecto"
+- npm install
+- npm run dev 
+
