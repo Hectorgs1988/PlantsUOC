@@ -7,7 +7,7 @@ email: hectorgs@uoc.edu
 
 Run: 
 
-- cd "ruta del proyecto"
+- cd "project path"
 - npm install
 - npm run dev 
 
