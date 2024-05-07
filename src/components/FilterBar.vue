@@ -29,7 +29,6 @@
 </template>
   
 <script setup>
-//COMPOSITION.API
 import {ref, watch} from 'vue';
 
 const sortBy = ref('name');
@@ -40,7 +39,6 @@ const showFavorites = ref(false);
 const emit = defineEmits(['update-filter']);
 
 const emitFilterUpdate = () =>{
-  //Para emitir el vento
   emit('update-filter',{
     sortBy:sortBy.value,
     order: order.value,

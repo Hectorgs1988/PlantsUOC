@@ -13,7 +13,7 @@
 import PlantItem from './PlantItem.vue';
 import { defineProps, defineEmits } from 'vue';
 
-//Usar defineProps para definir propiedades y obtener beneficios
+
 const props = defineProps({
   plantList: {
     type:Array,

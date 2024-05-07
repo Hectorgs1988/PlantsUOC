@@ -19,7 +19,7 @@
 <script setup>
 import { defineEmits } from 'vue';
 
-//Asi lo tenia antes
+
 const emit = defineEmits(['close']);
 
 function closeModal(){

@@ -51,7 +51,6 @@ const DeletePlant = () => {
   emit('delete-plant', props.plantInfo.id);
 };
 
-//Use ref for reactive data that needs to be reactive
 const icon = ref(deleteIcon);
 </script>
   

@@ -98,7 +98,6 @@ const submitForm = () => {
     labels: labelsArray
   };
 
-  //newPlant va sin comillas porque se esta pasando el objeto
   emit('submit-plant', newPlant);
   resetForm();
 };
@@ -112,7 +111,7 @@ const resetForm = () => {
       plant.value[key] = '';
     }
   }
-  plant.value.rating = 0; // Restablece explícitamente la calificación si es un rango
+  plant.value.rating = 0;
 };
 </script>
 
