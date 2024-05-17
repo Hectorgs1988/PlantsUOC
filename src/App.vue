@@ -25,138 +25,57 @@
   </div>
 </template>
 
-
 <script setup>
-import { ref, watch, reactive } from 'vue'
+import { ref, watch, reactive, onMounted } from 'vue'
 import PlantList from './components/PlantList.vue';
 import SearchBar from './components/SearchBar.vue';
 import FilterBar from './components/FilterBar.vue';
 import ModalLayer from './components/ModalLayer.vue';
 import PlantForm from './components/PlantForm.vue';
+import axios from 'axios';
 
-//Generation of test plants
-const plantList = ref([
-  {
-    id: 1,
-    name: 'Monstera',
-    description: 'The Monstera is a tropical plant native to Central America. It is known for its large, glossy leaves that have natural holes in them. The Monstera is a popular houseplant due to its unique appeareance and low maintenance requierements.',
-    date: '2021-06-01',
-    family: 'Araceae',
-    genus: 'Monstera',
-    species: 'Monstera deliciosa',
-    labels: ['Tropical', 'houseplant', 'low maintenace'],
-    favorite: true,
-    rating: 5,
-    image: 'monstera-deliciosa-plant-pot.jpg'
-
-  },
-  
-
-  {
-   id: 2,
-   name: 'Fiddle Leaf Fig',
-   description: 'The Fiddle is a houseplant known for its large, violin-shaped leaves. It is native to western Africa and is part of the Ficus genus. The Fiddle Leaf Fig is a favorite among interior designers due to its striking appearance and ability to grow indoors',
-   date: '2021-06-01',
-   family: 'Moraceae',
-   genus: 'Ficus',
-   species: 'Ficus lyrata',
-   labels: ['houseplant', 'interior', 'low maintenace'],
-   favorite: true,
-   rating: 4,
-   image: 'fiddle-leaf-fig-plant-pot.jpg'
- },
-
- {
-   id: 3,
-   name: 'Snake Plant',
-   description: 'Lorem ipsum dolor sit amet consectetur adipiscing elit tortor in, feugiat tempus nec eu phasellus nam varius montes, nisi imperdiet bibendum faucibus libero pretium hac nullam. Sociosqu iaculis etiam ridiculus viverra fringilla pulvinar, ac praesent leo egestas purus orci quisque, convallis rhoncus primis duis cursus. Tempor arcu integer dis ligula et luctus pellentesque penatibus, rutrum risus ornare sapien taciti est.',
-   date: '2021-06-01',
-   family: 'Asparagaceae',
-   genus: 'Monstera',
-   species: 'Monstera deliciosa',
-   labels: ['Tropical', 'houseplant', 'low maintenace'],
-   favorite: true,
-   rating: 5,
-   image: 'still-life-with-indoor-plants.jpg'
- },
-
- {
-   id: 4,
-   name: 'Pothos',
-   description: 'Lorem ipsum dolor sit amet consectetur adipiscing elit curabitur, dictum natoque posuere lacinia primis ridiculus quam est netus, gravida egestas dictumst porttitor class aliquam hac quis, et fringilla cras imperdiet dui eu etiam. Ad ut fames sem suscipit vel mus, diam facilisi lacus dignissim hendrerit nibh, tincidunt pulvinar volutpat proin cubilia.',
-   date: '2021-06-01',
-   family: 'Araceae',
-   genus: 'Monstera',
-   species: 'Monstera deliciosa',
-   labels: ['Tropical', 'houseplant', 'low maintenace'],
-   favorite: false,
-   rating: 3,
-   image: 'pothos-plant-pot-bench.jpg'
- },
-
- {
-   id: 5,
-   name: 'Ficus Europeo',
-   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan tellus et felis vehicula, vitae porta ex convallis. Phasellus ut euismod leo. Fusce vitae pulvinar diam, ac egestas quam. Phasellus feugiat orci eget quam maximus porttitor. Sed sed consequat dui. Suspendisse commodo commodo odio, at congue massa blandit nec. Donec dignissim eu orci in molestie. Nunc in metus orci. Quisque vehicula neque a nunc accumsan commodo. Sed nec rhoncus tellus. Pellentesque vulputate sagittis massa ut mollis. In ullamcorper varius tortor at euismod. Phasellus feugiat ante sit amet mi pretium lobortis nec eget elit. Sed nec nisl in quam facilisis placerat.',
-   date: '2021-06-01',
-   family: 'Araceae',
-   genus: 'Monstera',
-   species: 'Monstera deliciosa',
-   labels: ['Tropical', 'houseplant', 'low maintenace'],
-   favorite: false,
-   rating: 4,
-   image: 'botanical-leaves.jpg'
- },
-]);
-
-const filteredPlantList = ref([...plantList.value]);
+// Estado inicial
+const plantList = ref([]);
+const filteredPlantList = ref([]);
 const currentFilterCriteria = reactive({
   query: '',
   sortBy: 'name',
   order: 'asc',
   showFavorites: false,
 });
-
 const isModalVisible = ref(false);
-const newPlant = reactive({
-  name: '',
-  family: '',
+
+// Cargar datos iniciales de la API
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/garden');
+    console.log('Response from API:', response.data);
+    plantList.value = Array.isArray(response.data.garden) ? response.data.garden : [];
+    applyFilters();
+  } catch (error) {
+    console.error('Error al cargar plantas:', error);
+  }
 });
 
+// Manejo de búsqueda
 const handleSearch = (query) => {
   currentFilterCriteria.query = query;
   applyFilters();
 };
 
-const handleAddPlant = () => {
-  isModalVisible.value = true;
-};
-
-
-const handleDeletePlant = (id) => {
-  plantList.value = plantList.value.filter(plant => plant.id !== id);
-};
-
-const closeModal = () => {
-  isModalVisible.value = false;
-};
-
-
-const addNewPlant = (newPlantData) => {
-  const newPlantWithId = { ...newPlantData, id: Date.now() };
-  plantList.value.push(newPlantWithId);
-  applyFilters(); 
-  closeModal();
-  resetFormState(); 
-};
-
-
+// Manejo de filtro
 const handleFilterUpdate = (criteria) => {
   Object.assign(currentFilterCriteria, criteria);
   applyFilters();
 };
 
+// Aplicar filtros a la lista de plantas
 const applyFilters = () => {
+  if (!Array.isArray(plantList.value)) {
+    console.error('plantList.value is not an array:', plantList.value);
+    return;
+  }
+
   let result = plantList.value.slice();
 
   if (currentFilterCriteria.showFavorites) {
@@ -179,9 +98,50 @@ const applyFilters = () => {
   filteredPlantList.value = result;
 };
 
-watch(plantList, () => {
-  applyFilters();
-});
+watch(plantList, applyFilters);
+
+// Manejo del modal
+const handleAddPlant = () => {
+  isModalVisible.value = true;
+};
+
+const closeModal = () => {
+  isModalVisible.value = false;
+};
+
+// Agregar una nueva planta
+const addNewPlant = async (newPlantData) => {
+  try {
+    console.log('Data being sent to API:', newPlantData);
+    const postResponse = await axios.post('http://localhost:3000/plant', newPlantData);
+    console.log('Post response:', postResponse.data);
+    
+    if (postResponse.data && !postResponse.data.error) {
+      const response = await axios.get('http://localhost:3000/garden');
+      console.log('Updated plant list:', response.data);
+      plantList.value = Array.isArray(response.data.garden) ? response.data.garden : [];
+      applyFilters();
+      closeModal();
+    } else {
+      console.error('Error al añadir la planta:', postResponse.data.message);
+    }
+  } catch (error) {
+    console.error('Error al añadir la planta:', error);
+  }
+};
+
+
+// Eliminar una planta
+const handleDeletePlant = async (id) => {
+  try {
+    await axios.delete(`http://localhost:3000/plant/${id}`);
+    const response = await axios.get('http://localhost:3000/garden');
+    plantList.value = Array.isArray(response.data.garden) ? response.data.garden : [];
+    applyFilters();
+  } catch (error) {
+    console.error('Error al eliminar la planta:', error);
+  }
+};
 </script>
 
 <style scoped>
