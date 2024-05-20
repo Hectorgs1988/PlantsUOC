@@ -1,77 +1,66 @@
 <template>
   <div class="plant-form">
     <form class="plant-form__form" @submit.prevent="submitForm">
-      
-      <!--Left column -->
       <div class="plant-form__form-row">
         <div class="plant-form__form-group">
-          <label for="name">Name</label>
+          <label for="name">Nombre</label>
           <input id="name" v-model="plant.name" type="text" required>
 
-          <label for="imageURL">ImageURL</label>
-          <input id="imageURL" v-model="plant.imageURL" type="text" required>
+          <label for="image">URL de Imagen</label>
+          <input id="image" v-model="plant.image" type="text" required>
 
-          <label for="family">Family</label>
+          <label for="family">Familia</label>
           <input id="family" v-model="plant.family" type="text" required>
 
-          <label for="species">Species</label>
+          <label for="species">Especie</label>
           <input id="species" v-model="plant.species" type="text" required>
 
-          <label for="favorite">Favorite</label>
+          <label for="favorite">Favorito</label>
           <input id="favorite" v-model="plant.favorite" type="checkbox">
-
         </div>
         <div class="plant-form__form-group">
-          <label for="personalNote">personal Note</label>
-          <input id="personalNote" v-model="plant.personalNote" type="text" required>
+          <label for="personalNote">Nota Personal</label>
+          <input id="personalNote" v-model="plant.personalNote" type="text">
         </div>
       </div>
-
-     <!--Right column-->
       <div class="plant-form__form-row">
         <div class="plant-form__form-group">
-          <label for="description">Description</label>
+          <label for="description">Descripción</label>
           <input id="description" v-model="plant.description" type="text" required>
 
-          <label for="date">Date</label>
+          <label for="date">Fecha</label>
           <input id="date" v-model="plant.date" type="date" required>
 
-          <label for="genus">Genus</label>
+          <label for="genus">Género</label>
           <input id="genus" v-model="plant.genus" type="text" required>
 
-          <label for="labels">Labels</label>
-          <input id="labels" v-model="plant.labels" type="text" required>
-
+          <label for="labels">Etiquetas</label>
+          <input id="labels" v-model="plant.labels" type="text">
         </div>
         <div class="plant-form__form-group">
-          <label for="rating">Rating</label>
+          <label for="rating">Calificación</label>
           <input id="rating" v-model="plant.rating" type="range" min="0" max="5">
           <span>{{ plant.rating }}</span>
         </div>
       </div>
-  
-      <!-- Add button -->
       <div class="plant-form__form-group plant-form__form-group--actions">
-        <button type="submit" class="plant-form__submit">Add plant</button>
+        <button type="submit" class="plant-form__submit">Agregar Planta</button>
       </div>
     </form>
   </div>
 </template>
-  
 
 <script setup>
-import {ref, defineEmits } from 'vue';
+import { ref, defineEmits } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
 
-//Definir los eventos que el componnete emitwe
 const emit = defineEmits(['submit-plant']);
 
-//Crear referencia reactiva
 const plant = ref({
   id: '',
   name: '',
   description: '',
-  imageURL: '',
+  image: '',  // Cambiado de imageURL a image
   date: '',
   family: '',
   genus: '',
@@ -82,12 +71,9 @@ const plant = ref({
   personalNote: '',
 });
 
-
-
-//Metodo para enviar el formulario
 const submitForm = () => {
-  if (!plant.value.name || !plant.value.description || !plant.value.imageURL || !plant.value.date) {
-    alert("Please fill in all required fields.");
+  if (!plant.value.name || !plant.value.description || !plant.value.image || !plant.value.date) {
+    alert("Por favor, complete todos los campos requeridos.");
     return;
   }
 
@@ -98,11 +84,11 @@ const submitForm = () => {
     labels: labelsArray
   };
 
+  console.log('Nueva planta:', newPlant); // Para depuración
   emit('submit-plant', newPlant);
   resetForm();
 };
 
-//Metodo para reiniciar el formulario
 const resetForm = () => {
   for (const key in plant.value) {
     if (typeof plant.value[key] === 'boolean') {
@@ -115,7 +101,6 @@ const resetForm = () => {
 };
 </script>
 
-  
 <style scoped>
   .plant-form {
     padding: 1rem;
@@ -167,4 +152,3 @@ const resetForm = () => {
     cursor: pointer;
   }
 </style>
-  

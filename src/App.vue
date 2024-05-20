@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { ref, watch, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import PlantList from './components/PlantList.vue';
 import SearchBar from './components/SearchBar.vue';
 import FilterBar from './components/FilterBar.vue';
@@ -98,8 +98,6 @@ const applyFilters = () => {
   filteredPlantList.value = result;
 };
 
-watch(plantList, applyFilters);
-
 // Manejo del modal
 const handleAddPlant = () => {
   isModalVisible.value = true;
@@ -112,13 +110,27 @@ const closeModal = () => {
 // Agregar una nueva planta
 const addNewPlant = async (newPlantData) => {
   try {
-    console.log('Data being sent to API:', newPlantData);
+    console.log('Datos enviados a la API:', newPlantData);
+
+    // Verificar que todos los campos requeridos estén presentes
+    const requiredFields = ['id', 'name', 'description', 'image', 'date'];
+    const missingFields = requiredFields.filter(field => !newPlantData[field]);
+
+    if (missingFields.length > 0) {
+      console.error(`Faltan los siguientes campos requeridos: ${missingFields.join(', ')}`);
+      alert(`Por favor, complete todos los campos requeridos: ${missingFields.join(', ')}`);
+      return;
+    }
+
+    // Convertir rating a número si es necesario
+    newPlantData.rating = Number(newPlantData.rating);
+
     const postResponse = await axios.post('http://localhost:3000/plant', newPlantData);
-    console.log('Post response:', postResponse.data);
-    
+    console.log('Respuesta del POST:', postResponse.data);
+
     if (postResponse.data && !postResponse.data.error) {
       const response = await axios.get('http://localhost:3000/garden');
-      console.log('Updated plant list:', response.data);
+      console.log('Lista de plantas actualizada:', response.data);
       plantList.value = Array.isArray(response.data.garden) ? response.data.garden : [];
       applyFilters();
       closeModal();
@@ -134,14 +146,25 @@ const addNewPlant = async (newPlantData) => {
 // Eliminar una planta
 const handleDeletePlant = async (id) => {
   try {
-    await axios.delete(`http://localhost:3000/plant/${id}`);
+    console.log(`Eliminando planta con ID: ${id}`);
+    const deleteUrl = `http://localhost:3000/plant`;
+    console.log(`URL de eliminación: ${deleteUrl}`);
+
+    const deleteResponse = await axios.delete(deleteUrl, {
+      data: { id }
+    });
+    console.log('Respuesta de eliminación:', deleteResponse.data);
+
     const response = await axios.get('http://localhost:3000/garden');
+    console.log('Lista de plantas actualizada:', response.data);
     plantList.value = Array.isArray(response.data.garden) ? response.data.garden : [];
     applyFilters();
   } catch (error) {
     console.error('Error al eliminar la planta:', error);
   }
 };
+
+
 </script>
 
 <style scoped>
