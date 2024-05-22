@@ -46,7 +46,6 @@ const props = defineProps({
 //Evento para informar que una planta ha sido eliminada
 const emit = defineEmits(['delete-plant']);
 
-//Revisar si tengo que enviar id como parametro dentro del metodo
 const DeletePlant = () => {
   emit('delete-plant', props.plantInfo.id);
 };

@@ -23,7 +23,7 @@ const props = defineProps({
 
 const emit = defineEmits(['delete-plant']);
 
-//Funcion para manejar el evento delete-plant y remitirlo
+//Funcion para manejar el evento delete-plant
 const handleDeletePlant = (id) => {
   emit('delete-plant', id);
 };

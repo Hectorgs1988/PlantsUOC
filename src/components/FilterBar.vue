@@ -35,7 +35,6 @@ const sortBy = ref('name');
 const order = ref('asc');
 const showFavorites = ref(false);
 
-// Define los eventos que puede emitir este componente
 const emit = defineEmits(['update-filter']);
 
 const emitFilterUpdate = () =>{

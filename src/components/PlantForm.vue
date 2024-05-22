@@ -3,48 +3,48 @@
     <form class="plant-form__form" @submit.prevent="submitForm">
       <div class="plant-form__form-row">
         <div class="plant-form__form-group">
-          <label for="name">Nombre</label>
+          <label for="name">Name</label>
           <input id="name" v-model="plant.name" type="text" required>
 
-          <label for="image">URL de Imagen</label>
+          <label for="image">ImageURL</label>
           <input id="image" v-model="plant.image" type="text" required>
 
-          <label for="family">Familia</label>
+          <label for="family">Family</label>
           <input id="family" v-model="plant.family" type="text" required>
 
-          <label for="species">Especie</label>
+          <label for="species">Specie</label>
           <input id="species" v-model="plant.species" type="text" required>
 
-          <label for="favorite">Favorito</label>
+          <label for="favorite">Favorite</label>
           <input id="favorite" v-model="plant.favorite" type="checkbox">
         </div>
         <div class="plant-form__form-group">
-          <label for="personalNote">Nota Personal</label>
+          <label for="personalNote">Personal note</label>
           <input id="personalNote" v-model="plant.personalNote" type="text">
         </div>
       </div>
       <div class="plant-form__form-row">
         <div class="plant-form__form-group">
-          <label for="description">Descripción</label>
+          <label for="description">Description</label>
           <input id="description" v-model="plant.description" type="text" required>
 
-          <label for="date">Fecha</label>
+          <label for="date">Date</label>
           <input id="date" v-model="plant.date" type="date" required>
 
-          <label for="genus">Género</label>
+          <label for="genus">Genus</label>
           <input id="genus" v-model="plant.genus" type="text" required>
 
-          <label for="labels">Etiquetas</label>
+          <label for="labels">Labels</label>
           <input id="labels" v-model="plant.labels" type="text">
         </div>
         <div class="plant-form__form-group">
-          <label for="rating">Calificación</label>
+          <label for="rating">Rating</label>
           <input id="rating" v-model="plant.rating" type="range" min="0" max="5">
           <span>{{ plant.rating }}</span>
         </div>
       </div>
       <div class="plant-form__form-group plant-form__form-group--actions">
-        <button type="submit" class="plant-form__submit">Agregar Planta</button>
+        <button type="submit" class="plant-form__submit">Add plant</button>
       </div>
     </form>
   </div>
@@ -60,7 +60,7 @@ const plant = ref({
   id: '',
   name: '',
   description: '',
-  image: '',  // Cambiado de imageURL a image
+  image: '',  
   date: '',
   family: '',
   genus: '',
@@ -84,7 +84,7 @@ const submitForm = () => {
     labels: labelsArray
   };
 
-  console.log('Nueva planta:', newPlant); // Para depuración
+  //console.log('Nueva planta:', newPlant);
   emit('submit-plant', newPlant);
   resetForm();
 };
