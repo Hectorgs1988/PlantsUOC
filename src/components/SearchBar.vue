@@ -4,7 +4,7 @@
       <button class="clear" @click="clearSearch">Clear</button>
       <button class="add" @click="addPlant">Add plant</button>
     </div>
-  </template>
+</template>
   
 
 <script setup>

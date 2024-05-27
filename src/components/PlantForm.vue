@@ -84,7 +84,6 @@ const submitForm = () => {
     labels: labelsArray
   };
 
-  //console.log('Nueva planta:', newPlant);
   emit('submit-plant', newPlant);
   resetForm();
 };

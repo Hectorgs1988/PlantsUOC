@@ -7,7 +7,7 @@
         @delete-plant="handleDeletePlant"
       />
     </div>
-  </template>
+</template>
 
 <script setup>
 import PlantItem from './PlantItem.vue';

@@ -1,11 +1,19 @@
-# Plants Book by HGSWeb application created with VUE.js + Vite
+# Plants Book by HGS. Web application created with VUE.js + Vite
 
+
+### PEC4 
 ### Author: Héctor García Sácnchez
 ### email: hectorgs@uoc.edu
 
-Run: 
+Run Dev: 
 
 - cd "project path"
 - npm install
 - npm run dev 
+
+Run API: 
+
+- cd "project path"
+- npm install
+- npm run api
 

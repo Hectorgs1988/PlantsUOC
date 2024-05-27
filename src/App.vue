@@ -34,7 +34,7 @@ import ModalLayer from './components/ModalLayer.vue';
 import PlantForm from './components/PlantForm.vue';
 import axios from 'axios';
 
-// Estado inicial
+// Initial state
 const plantList = ref([]);
 const filteredPlantList = ref([]);
 const currentFilterCriteria = reactive({
@@ -45,7 +45,8 @@ const currentFilterCriteria = reactive({
 });
 const isModalVisible = ref(false);
 
-// Cargar datos iniciales de la API
+// Cargar datos iniciales de la API 
+//TODO:review HTTP image
 onMounted(async () => {
   try {
     const response = await axios.get('http://localhost:3000/garden');
@@ -57,19 +58,16 @@ onMounted(async () => {
   }
 });
 
-// Manejo de búsqueda
 const handleSearch = (query) => {
   currentFilterCriteria.query = query;
   applyFilters();
 };
 
-//Filtro
 const handleFilterUpdate = (criteria) => {
   Object.assign(currentFilterCriteria, criteria);
   applyFilters();
 };
 
-// Aplicar filtros a la lista de plantas
 const applyFilters = () => {
   if (!Array.isArray(plantList.value)) {
     console.error('plantList.value is not an array:', plantList.value);
@@ -98,7 +96,6 @@ const applyFilters = () => {
   filteredPlantList.value = result;
 };
 
-//Modal
 const handleAddPlant = () => {
   isModalVisible.value = true;
 };
@@ -107,31 +104,28 @@ const closeModal = () => {
   isModalVisible.value = false;
 };
 
-// Agregar una nueva planta
+//Add a new plant
 const addNewPlant = async (newPlantData) => {
   try {
-    //console.log('Datos enviados a la API:', newPlantData);
-
-    // Verificar que todos los campos requeridos estén presentes TODO
+    //Required Fieds
     const requiredFields = ['id', 'name', 'description', 'image', 'date']; 
     const missingFields = requiredFields.filter(field => !newPlantData[field]);
 
-    if (missingFields.length > 0) {
-      console.error(`Faltan los siguientes campos requeridos: ${missingFields.join(', ')}`);
-      alert(`Por favor, complete todos los campos requeridos: ${missingFields.join(', ')}`);
-      return;
-    }
+    //TODO: depuracion
+    // if (missingFields.length > 0) {
+    //   console.error(`Faltan los siguientes campos requeridos: ${missingFields.join(', ')}`);
+    //   alert(`Por favor, complete todos los campos requeridos: ${missingFields.join(', ')}`);
+    //   return;
+    // }
 
-    // Convertir rating a número 
+    //Rating to numbert
     newPlantData.rating = Number(newPlantData.rating);
 
     const postResponse = await axios.post('http://localhost:3000/plant', newPlantData);
-    //Log para la Respuesta del POST
-    //console.log('Respuesta del POST:', postResponse.data);
-
+  
     if (postResponse.data && !postResponse.data.error) {
       const response = await axios.get('http://localhost:3000/garden');
-      //console.log('Lista de plantas actualizada:', response.data);
+      console.log('Lista de plantas actualizada:', response.data);
       plantList.value = Array.isArray(response.data.garden) ? response.data.garden : [];
       applyFilters();
       closeModal();
@@ -143,29 +137,24 @@ const addNewPlant = async (newPlantData) => {
   }
 };
 
-
-// Eliminar una planta
+// Delete plant
 const handleDeletePlant = async (id) => {
   try {
-    //console.log(`Eliminando planta con ID: ${id}`);
     const deleteUrl = `http://localhost:3000/plant`;
-    //console.log(`URL de eliminación: ${deleteUrl}`);
+    console.log(`URL de eliminación: ${deleteUrl}`);
 
     const deleteResponse = await axios.delete(deleteUrl, {
       data: { id }
     });
-    //console.log('Respuesta de eliminación:', deleteResponse.data);
-
+  
     const response = await axios.get('http://localhost:3000/garden');
-    //console.log('Lista de plantas actualizada:', response.data);
+    console.log('Lista de plantas actualizada:', response.data);
     plantList.value = Array.isArray(response.data.garden) ? response.data.garden : [];
     applyFilters();
   } catch (error) {
     console.error('Error al eliminar la planta:', error);
   }
 };
-
-
 </script>
 
 <style scoped>

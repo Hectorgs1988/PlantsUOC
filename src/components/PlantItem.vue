@@ -30,13 +30,12 @@
         </div>
       </div>
     </div>
-  </template>
+</template>
   
 <script setup>
 import { ref, defineEmits } from 'vue';
 import deleteIcon from '@/assets/images/delete-button.svg';
 
-//props the defineProps
 const props = defineProps({
   plantInfo: {
     type: Object,
