@@ -7,7 +7,7 @@
       </button>
 
       <div class="plant-item__image">
-        <img :src="`/public/${plantInfo.image}`" alt="Plant image" />
+        <img :src="plantInfo.image" alt="Plant image" />
       </div>
 
       <div class="plant-item__info">
