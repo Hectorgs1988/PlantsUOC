@@ -30,13 +30,12 @@
         </div>
       </div>
     </div>
-  </template>
+</template>
   
 <script setup>
 import { ref, defineEmits } from 'vue';
 import deleteIcon from '@/assets/images/delete-button.svg';
 
-//props the defineProps
 const props = defineProps({
   plantInfo: {
     type: Object,
@@ -46,7 +45,6 @@ const props = defineProps({
 //Evento para informar que una planta ha sido eliminada
 const emit = defineEmits(['delete-plant']);
 
-//Revisar si tengo que enviar id como parametro dentro del metodo
 const DeletePlant = () => {
   emit('delete-plant', props.plantInfo.id);
 };

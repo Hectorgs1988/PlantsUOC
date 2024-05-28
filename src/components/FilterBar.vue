@@ -1,6 +1,6 @@
 <template>
     <div class="filter-bar">
-      <!-- To search for... -->
+      <!-- To search for...-->
       <div class="filter-bar__select">
         <label for="sortBy">Sort by:</label>
         <select id="sortBy" v-model="sortBy">
@@ -11,7 +11,7 @@
         </select>
       </div>
   
-      <!-- Order Ascending / Descending -->
+      <!-- Order Ascending / Descending TODO -->
       <div class="filter-bar__select">
         <label for="order">Sort by:</label>
         <select id="order" v-model="order">
@@ -35,7 +35,6 @@ const sortBy = ref('name');
 const order = ref('asc');
 const showFavorites = ref(false);
 
-// Define los eventos que puede emitir este componente
 const emit = defineEmits(['update-filter']);
 
 const emitFilterUpdate = () =>{
