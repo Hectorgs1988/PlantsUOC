@@ -45,8 +45,7 @@ const currentFilterCriteria = reactive({
 });
 const isModalVisible = ref(false);
 
-// Cargar datos iniciales de la API 
-//TODO:review HTTP image
+
 onMounted(async () => {
   try {
     const response = await axios.get('http://localhost:3000/garden');
@@ -118,7 +117,7 @@ const addNewPlant = async (newPlantData) => {
     //   return;
     // }
 
-    //Rating to numbert
+  
     newPlantData.rating = Number(newPlantData.rating);
 
     const postResponse = await axios.post('http://localhost:3000/plant', newPlantData);

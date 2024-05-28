@@ -16,7 +16,6 @@ const emit = defineEmits(['search', 'add-plant']);
 //Utiliza ref para hacer reactivos los datos que necesitan ser observados por Vue
 const searchQuery = ref('');
 
-//Metodos convertidos a funciones simples
 function onSearch(){
   emit('search', searchQuery.value);
 }

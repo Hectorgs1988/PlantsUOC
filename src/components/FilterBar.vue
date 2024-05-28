@@ -11,7 +11,7 @@
         </select>
       </div>
   
-      <!-- Order Ascending / Descending TODO -->
+      <!-- Order Ascending / Descending-->
       <div class="filter-bar__select">
         <label for="order">Sort by:</label>
         <select id="order" v-model="order">
